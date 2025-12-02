@@ -16,7 +16,11 @@ const CATEGORY_LABELS: Record<MealCategory, string> = {
   vegetarian: 'Vegetar',
 };
 
-export function Settings() {
+interface SettingsProps {
+  onClose?: () => void;
+}
+
+export function Settings({ onClose }: SettingsProps = {} as SettingsProps) {
   const { categoryWeightings, updateCategoryWeighting, resetWeightings } = useSettings();
   const { currentHousehold } = useHousehold();
   const { user, logout } = useAuth();
@@ -136,7 +140,7 @@ export function Settings() {
       {showShareModal && <ShareHouseholdModal onClose={() => setShowShareModal(false)} />}
       {showMigrationModal && <MigrationModal onClose={() => setShowMigrationModal(false)} />}
 
-      <BottomNav />
+      {!onClose && <BottomNav />}
     </div>
   );
 }

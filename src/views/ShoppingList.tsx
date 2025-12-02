@@ -10,7 +10,11 @@ import { BottomNav } from '../components/BottomNav';
 import { Check, Plus, X } from 'lucide-react';
 import './ShoppingList.css';
 
-export function ShoppingList() {
+interface ShoppingListProps {
+  onClose?: () => void;
+}
+
+export function ShoppingList({ onClose }: ShoppingListProps = {} as ShoppingListProps) {
   const { year, week, weekInfo, goToPreviousWeek, goToNextWeek } = useWeekNavigation();
   const { weekPlans } = useWeekPlan();
   const { meals } = useMeals();
@@ -21,6 +25,7 @@ export function ShoppingList() {
     toggleItemChecked,
     addCustomItem,
     removeItem,
+    removeAllItems,
     syncItemsFromWeekPlan,
   } = useShoppingList();
   const { removeFromCustomItemHistory } = useHousehold();
@@ -119,6 +124,16 @@ export function ShoppingList() {
     }
   };
 
+  const handleRemoveAllItems = async () => {
+    if (window.confirm('Er du sikker på at du vil fjerne alle varer fra handlelisten?')) {
+      try {
+        await removeAllItems(weekKey);
+      } catch (error) {
+        console.error('Failed to remove all items:', error);
+      }
+    }
+  };
+
   return (
     <div className="shopping-list">
       <WeekSelector week={week} onPrevious={goToPreviousWeek} onNext={goToNextWeek} />
@@ -126,34 +141,47 @@ export function ShoppingList() {
       {/* Unchecked items grid */}
       {uncheckedItems.length > 0 && (
         <div className="shopping-list-section">
-          <h2 className="shopping-list-section-title font-display-semibold-20">Handleliste</h2>
+          <div className="shopping-list-section-header">
+            <h2 className="shopping-list-section-title font-display-semibold-20">Handleliste</h2>
+            {allItems.length > 0 && (
+              <button
+                className="shopping-list-remove-all"
+                onClick={handleRemoveAllItems}
+                aria-label="Remove all items"
+              >
+                <X size={16} />
+                <span className="font-regular-14">Fjern alle</span>
+              </button>
+            )}
+          </div>
           <div className="shopping-list-grid">
             {uncheckedItems.map((item) => (
-              <button
-                key={item.id}
-                className="shopping-list-item"
-                onClick={() => handleItemClick(item.id)}
-              >
-                <div className="shopping-list-item-content">
-                  <span className="shopping-list-item-name font-display-semibold-16">
-                    {item.name}
-                  </span>
-                  {item.quantity !== undefined && (
-                    <span className="shopping-list-item-quantity font-regular-16">
-                      {item.quantity}
+              <div key={item.id} className="shopping-list-item-wrapper">
+                <button
+                  className="shopping-list-item"
+                  onClick={() => handleItemClick(item.id)}
+                >
+                  <div className="shopping-list-item-content">
+                    <span className="shopping-list-item-name font-display-semibold-16">
+                      {item.name}
                     </span>
-                  )}
-                </div>
-                {item.isCustom && (
-                  <button
+                    {item.quantity !== undefined && (
+                      <span className="shopping-list-item-quantity font-regular-16">
+                        {item.quantity}
+                      </span>
+                    )}
+                  </div>
+                </button>
+                
+                <button
                     className="shopping-list-item-remove"
                     onClick={(e) => handleRemoveItem(e, item.id)}
                     aria-label="Remove item"
-                  >
-                    <X size={16} />
-                  </button>
-                )}
-              </button>
+                 >
+                  <X size={16} />
+                 </button>
+                
+              </div>
             ))}
           </div>
         </div>
@@ -239,22 +267,23 @@ export function ShoppingList() {
           <h2 className="shopping-list-section-title font-display-semibold-20">Krysset av</h2>
           <div className="shopping-list-grid">
             {checkedItems.map((item) => (
-              <button
-                key={item.id}
-                className="shopping-list-item checked"
-                onClick={() => handleItemClick(item.id)}
-              >
-                <div className="shopping-list-item-content">
-                  <span className="shopping-list-item-name font-display-semibold-16">
-                    {item.name}
-                  </span>
-                  {item.quantity !== undefined && (
-                    <span className="shopping-list-item-quantity font-regular-16">
-                      {item.quantity}
+              <div key={item.id} className="shopping-list-item-wrapper">
+                <button
+                  className="shopping-list-item checked"
+                  onClick={() => handleItemClick(item.id)}
+                >
+                  <div className="shopping-list-item-content">
+                    <span className="shopping-list-item-name font-display-semibold-16">
+                      {item.name}
                     </span>
-                  )}
-                </div>
-                <Check size={20} className="shopping-list-item-check" />
+                    {item.quantity !== undefined && (
+                      <span className="shopping-list-item-quantity font-regular-16">
+                        {item.quantity}
+                      </span>
+                    )}
+                  </div>
+                  <Check size={20} className="shopping-list-item-check" />
+                </button>
                 {item.isCustom && (
                   <button
                     className="shopping-list-item-remove"
@@ -264,7 +293,7 @@ export function ShoppingList() {
                     <X size={16} />
                   </button>
                 )}
-              </button>
+              </div>
             ))}
           </div>
         </div>
@@ -276,7 +305,7 @@ export function ShoppingList() {
         </div>
       )}
 
-      <BottomNav />
+      {!onClose && <BottomNav />}
     </div>
   );
 }

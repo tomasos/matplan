@@ -7,7 +7,11 @@ import { IngredientInput } from '../components/IngredientInput';
 import { BottomNav } from '../components/BottomNav';
 import './AddMeal.css';
 
-export function AddMeal() {
+interface AddMealProps {
+  onClose?: () => void;
+}
+
+export function AddMeal({ onClose }: AddMealProps = {} as AddMealProps) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const editId = searchParams.get('edit');
@@ -69,17 +73,29 @@ export function AddMeal() {
       addMeal(mealData);
     }
 
-    navigate('/meals');
+    if (onClose) {
+      onClose();
+    } else {
+      navigate('/meals');
+    }
   };
 
-  const onClose = () => {
-    navigate('/meals');
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      navigate('/meals');
+    }
   };
 
   const handleDelete = () => {
     if (isEditing && editId && window.confirm('Er du sikker på at du vil slette denne retten?')) {
       deleteMeal(editId);
-      navigate('/meals');
+      if (onClose) {
+        onClose();
+      } else {
+        navigate('/meals');
+      }
     }
   };
 
@@ -181,14 +197,14 @@ export function AddMeal() {
           <button onClick={handleDelete} className="delete-button font-display-semibold-16">
             Slett
           </button>
-          <button onClick={onClose} className="cancel-button font-display-semibold-16">
+          <button onClick={handleClose} className="cancel-button font-display-semibold-16">
              Avbryt
            </button>
         </>
         )}
       </div>
 
-      <BottomNav />
+      {!onClose && <BottomNav />}
     </div>
   );
 }

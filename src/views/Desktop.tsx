@@ -12,7 +12,11 @@ import { MealCard } from '../components/MealCard';
 import { MealListItem } from '../components/MealListItem';
 import { MealSelectionModal } from '../components/MealSelectionModal';
 import { AddMealModal } from '../components/AddMealModal';
-import { Calendar, Carrot, Fish, Beef, Heart, Plus } from 'lucide-react';
+import { SidebarMenu } from '../components/SidebarMenu';
+import { ShoppingList } from './ShoppingList';
+import { AddMeal } from './AddMeal';
+import { Settings } from './Settings';
+import { Calendar, Carrot, Fish, Beef, Heart, Plus, X } from 'lucide-react';
 import './Desktop.css';
 
 export function Desktop() {
@@ -26,6 +30,7 @@ export function Desktop() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<Set<MealCategory>>(new Set());
   const [showFavorites, setShowFavorites] = useState(false);
+  const [activeView, setActiveView] = useState<'shopping' | 'add-meal' | 'settings' | null>(null);
 
   // Memoize the day cards with meals to ensure re-render when meals change
   const dayCards = useMemo(() => {
@@ -121,65 +126,89 @@ export function Desktop() {
       </div>
 
       <div className="desktop-right">
-        <div className="desktop-meal-filters">
-          <button
-            onClick={() => toggleCategory('vegetarian')}
-            className={`desktop-filter-button ${selectedCategories.has('vegetarian') ? 'active' : ''}`}
-          >
-            <Carrot size={24} />
-          </button>
-          <button
-            onClick={() => toggleCategory('fish')}
-            className={`desktop-filter-button ${selectedCategories.has('fish') ? 'active' : ''}`}
-          >
-            <Fish size={24} />
-          </button>
-          <button
-            onClick={() => toggleCategory('meat')}
-            className={`desktop-filter-button ${selectedCategories.has('meat') ? 'active' : ''}`}
-          >
-            <Beef size={24} />
-          </button>
-          <button
-            onClick={() => setShowFavorites(!showFavorites)}
-            className={`desktop-filter-button ${showFavorites ? 'active' : ''}`}
-          >
-            <Heart size={24} fill={showFavorites ? 'currentColor' : 'none'} />
-          </button>
-        </div>
+        <div className="desktop-right-content">
+          <div className="desktop-meal-filters">
+            <button
+              onClick={() => toggleCategory('vegetarian')}
+              className={`desktop-filter-button ${selectedCategories.has('vegetarian') ? 'active' : ''}`}
+            >
+              <Carrot size={24} />
+            </button>
+            <button
+              onClick={() => toggleCategory('fish')}
+              className={`desktop-filter-button ${selectedCategories.has('fish') ? 'active' : ''}`}
+            >
+              <Fish size={24} />
+            </button>
+            <button
+              onClick={() => toggleCategory('meat')}
+              className={`desktop-filter-button ${selectedCategories.has('meat') ? 'active' : ''}`}
+            >
+              <Beef size={24} />
+            </button>
+            <button
+              onClick={() => setShowFavorites(!showFavorites)}
+              className={`desktop-filter-button ${showFavorites ? 'active' : ''}`}
+            >
+              <Heart size={24} fill={showFavorites ? 'currentColor' : 'none'} />
+            </button>
+          </div>
 
-        <div className="desktop-search">
-          <input
-            type="text"
-            placeholder="Søk"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="desktop-search-input font-regular-16"
-          />
-        </div>
-
-        <div className="desktop-meal-list-header">
-          <h2 className="desktop-meal-list-title font-display-semibold-20">Retter</h2>
-          <button
-            onClick={() => setShowAddMealModal(true)}
-            className="desktop-add-meal-button font-display-semibold-16"
-            aria-label="Add meal"
-          >
-            <Plus size={20} />
-            Ny rett
-          </button>
-        </div>
-
-        <div className="desktop-meal-list">
-          {filteredMeals.map((meal) => (
-            <MealListItem
-              key={meal.id}
-              meal={meal}
-              onToggleFavorite={() => toggleFavorite(meal.id)}
-              onClick={() => setEditingMealId(meal.id)}
+          <div className="desktop-search">
+            <input
+              type="text"
+              placeholder="Søk"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="desktop-search-input font-regular-16"
             />
-          ))}
+          </div>
+
+          <div className="desktop-meal-list-header">
+            <h2 className="desktop-meal-list-title font-display-semibold-20">Retter</h2>
+            <button
+              onClick={() => setShowAddMealModal(true)}
+              className="desktop-add-meal-button font-display-semibold-16"
+              aria-label="Add meal"
+            >
+              <Plus size={20} />
+              Ny rett
+            </button>
+          </div>
+
+          <div className="desktop-meal-list">
+            {filteredMeals.map((meal) => (
+              <MealListItem
+                key={meal.id}
+                meal={meal}
+                onToggleFavorite={() => toggleFavorite(meal.id)}
+                onClick={() => setEditingMealId(meal.id)}
+              />
+            ))}
+          </div>
         </div>
+
+        <SidebarMenu activeView={activeView} onMenuItemClick={setActiveView} />
+
+        {/* Overlay container for sliding views */}
+        {activeView && (
+          <div className="desktop-overlay-backdrop" onClick={() => setActiveView(null)}>
+            <div className="desktop-overlay-content" onClick={(e) => e.stopPropagation()}>
+              <button
+                className="desktop-overlay-close"
+                onClick={() => setActiveView(null)}
+                aria-label="Close"
+              >
+                <X size={24} />
+              </button>
+              <div className="desktop-overlay-view">
+                {activeView === 'shopping' && <ShoppingList onClose={() => setActiveView(null)} />}
+                {activeView === 'add-meal' && <AddMeal onClose={() => setActiveView(null)} />}
+                {activeView === 'settings' && <Settings onClose={() => setActiveView(null)} />}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {selectedDay && (

@@ -114,7 +114,7 @@ export function Login() {
               disabled={loading}
               className="login-button font-display-semibold-16"
             >
-              {loading ? 'Sender...' : 'Send magisk lenke'}
+              {loading ? 'Logger inn...' : 'Logg inn'}
             </button>
           )}
 

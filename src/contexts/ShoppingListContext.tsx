@@ -30,6 +30,7 @@ interface ShoppingListContextType {
   toggleItemChecked: (weekKey: string, itemId: string) => Promise<void>;
   addCustomItem: (weekKey: string, itemName: string) => Promise<void>;
   removeItem: (weekKey: string, itemId: string) => Promise<void>;
+  removeAllItems: (weekKey: string) => Promise<void>;
   syncItemsFromWeekPlan: (weekKey: string, items: Omit<ShoppingListItem, 'id' | 'checked'>[]) => Promise<void>;
 }
 
@@ -317,6 +318,28 @@ export function ShoppingListProvider({ children }: { children: ReactNode }) {
     [shoppingLists, loadShoppingList, saveShoppingList]
   );
 
+  const removeAllItems = useCallback(
+    async (weekKey: string) => {
+      if (!loadedWeekKeysRef.current.has(weekKey)) {
+        await loadShoppingList(weekKey);
+      }
+
+      const weekData = shoppingLists[weekKey];
+      if (!weekData) return;
+
+      const updated = {
+        ...weekData,
+        items: [],
+      };
+      setShoppingLists((prev) => ({
+        ...prev,
+        [weekKey]: updated,
+      }));
+      await saveShoppingList(weekKey, updated);
+    },
+    [shoppingLists, loadShoppingList, saveShoppingList]
+  );
+
   const syncItemsFromWeekPlan = useCallback(
     async (weekKey: string, newItems: Omit<ShoppingListItem, 'id' | 'checked'>[]) => {
       if (!loadedWeekKeysRef.current.has(weekKey)) {
@@ -395,6 +418,7 @@ export function ShoppingListProvider({ children }: { children: ReactNode }) {
         toggleItemChecked,
         addCustomItem,
         removeItem,
+        removeAllItems,
         syncItemsFromWeekPlan,
       }}
     >

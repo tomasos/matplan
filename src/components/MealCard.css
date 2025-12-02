@@ -1,0 +1,34 @@
+.meal-card {
+  background-color: var(--highlight-primary);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 120px;
+  position: relative;
+  transition: opacity 0.2s;
+}
+
+.meal-card:hover {
+  opacity: 0.9;
+}
+
+.meal-card-icon {
+  margin-bottom: 8px;
+}
+
+.meal-card-name {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.meal-card-day {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+

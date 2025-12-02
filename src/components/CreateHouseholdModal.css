@@ -1,0 +1,130 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--bg-primary);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid var(--highlight-secondary);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+.modal-form {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--highlight-secondary);
+  border-radius: 8px;
+  background: var(--bg-white);
+  color: var(--bg-primary);
+  font-size: 16px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--highlight-tertiary);
+}
+
+.form-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-error {
+  color: #d32f2f;
+  padding: 8px;
+  background: rgba(211, 47, 47, 0.1);
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.modal-button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 16px;
+}
+
+.modal-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.modal-button-primary {
+  background: var(--highlight-primary);
+  color: var(--text-color);
+}
+
+.modal-button-primary:hover:not(:disabled) {
+  background: var(--highlight-secondary);
+}
+
+.modal-button-secondary {
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--highlight-secondary);
+}
+
+.modal-button-secondary:hover:not(:disabled) {
+  background: var(--highlight-primary);
+}
+

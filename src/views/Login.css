@@ -1,0 +1,92 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: var(--color-background);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-description {
+  color: var(--color-text-secondary);
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.login-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px 24px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login-button:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-button-dev {
+  background: #ff9800;
+}
+
+.login-button-dev:hover:not(:disabled) {
+  background: #f57c00;
+}
+
+.login-error {
+  color: var(--color-error, #d32f2f);
+  padding: 8px;
+  background: rgba(211, 47, 47, 0.1);
+  border-radius: 4px;
+}
+
+.login-message {
+  color: var(--color-success, #2e7d32);
+  padding: 8px;
+  background: rgba(46, 125, 50, 0.1);
+  border-radius: 4px;
+}
+

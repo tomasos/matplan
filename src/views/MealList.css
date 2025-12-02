@@ -1,0 +1,81 @@
+.meal-list {
+  min-height: 100vh;
+  padding-bottom: 80px;
+  background-color: var(--bg-primary);
+}
+
+.meal-list-filters {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  color: var(--text-color);
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  transition: all 0.2s;
+}
+
+.filter-button.active {
+  background-color: var(--highlight-primary);
+  border-color: var(--highlight-primary);
+}
+
+.filter-button:hover {
+  opacity: 0.8;
+}
+
+.meal-list-search {
+  padding: 0 16px 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--text-color);
+}
+
+.meal-list-content {
+  padding: 0 16px;
+}
+
+.meal-list-empty {
+  text-align: center;
+  padding: 32px;
+  color: var(--highlight-secondary);
+}
+
+.meal-list-add-button {
+  position: fixed;
+  bottom: 100px;
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--highlight-tertiary);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+  z-index: 50;
+}
+
+.meal-list-add-button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.meal-list-add-button:active {
+  transform: scale(0.95);
+}
+

@@ -1,0 +1,94 @@
+:root {
+  --text-color: #FAFAF9;
+  --bg-white: #FAFAF9;
+  --bg-primary: #305461;
+  --highlight-primary: #3D6A7A;
+  --highlight-secondary: #7AA1AF;
+  --highlight-tertiary: #639DB2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Serif', serif;
+  background-color: var(--bg-primary);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Font classes */
+.font-display-bold-32 {
+  font-family: 'Noto Serif Display', serif;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.font-display-bold-24 {
+  font-family: 'Noto Serif Display', serif;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.font-display-bold-16 {
+  font-family: 'Noto Serif Display', serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.font-display-semibold-20 {
+  font-family: 'Noto Serif Display', serif;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.font-display-semibold-16 {
+  font-family: 'Noto Serif Display', serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.font-regular-16 {
+  font-family: 'Noto Serif', serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.font-light-16 {
+  font-family: 'Noto Serif', serif;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+/* Button styles */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* Input styles */
+input,
+textarea {
+  font-family: inherit;
+  color: var(--bg-primary);
+  background-color: var(--bg-white);
+  border: none;
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(48, 84, 97, 0.5);
+}
+

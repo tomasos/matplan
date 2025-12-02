@@ -1,0 +1,9 @@
+.category-icon {
+  color: var(--text-color);
+  flex-shrink: 0;
+}
+
+.category-icon.filled {
+  fill: currentColor;
+}
+

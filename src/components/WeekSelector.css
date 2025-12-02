@@ -1,0 +1,25 @@
+.week-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.week-number {
+  min-width: 60px;
+  text-align: center;
+}
+
+.week-nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  color: var(--text-color);
+}
+
+.week-nav-button:hover {
+  opacity: 0.8;
+}
+

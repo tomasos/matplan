@@ -1,0 +1,32 @@
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 0;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--highlight-primary);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  color: var(--text-color);
+  transition: background-color 0.2s;
+}
+
+.nav-icon.active {
+  background-color: var(--highlight-primary);
+  border-radius: 8px;
+}
+
+.nav-icon:hover {
+  opacity: 0.8;
+}
+

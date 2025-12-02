@@ -1,0 +1,48 @@
+.ingredient-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ingredient-name {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.ingredient-quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color);
+}
+
+.quantity-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: var(--text-color);
+  background-color: var(--highlight-primary);
+  border-radius: 4px;
+}
+
+.quantity-button:hover {
+  opacity: 0.8;
+}
+
+.quantity-value {
+  min-width: 30px;
+  text-align: center;
+}
+
+.ingredient-delete {
+  padding: 4px;
+  color: var(--text-color);
+}
+
+.ingredient-delete:hover {
+  opacity: 0.8;
+}
+

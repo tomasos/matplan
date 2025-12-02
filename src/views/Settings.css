@@ -1,0 +1,152 @@
+.settings {
+  padding: 24px;
+  min-height: 100vh;
+  padding-bottom: 100px;
+  background-color: var(--bg-primary);
+}
+
+.settings-section {
+  margin-top: 32px;
+}
+
+.settings-description {
+  margin-top: 8px;
+  margin-bottom: 24px;
+  color: var(--highlight-secondary);
+  line-height: 1.5;
+}
+
+.weightings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.weighting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background-color: var(--highlight-primary);
+  border-radius: 8px;
+}
+
+.weighting-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.weighting-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.weighting-input {
+  width: 100px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.weighting-percentage {
+  color: var(--highlight-secondary);
+}
+
+.reset-button {
+  padding: 12px 24px;
+  background-color: var(--highlight-tertiary);
+  border-radius: 8px;
+  color: var(--text-color);
+  transition: background-color 0.2s;
+}
+
+.reset-button:hover {
+  background-color: var(--highlight-secondary);
+}
+
+.reset-button:active {
+  opacity: 0.8;
+}
+
+.household-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.household-selector-wrapper {
+  width: 100%;
+}
+
+.household-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.household-name-display {
+  padding: 12px 16px;
+  background-color: var(--highlight-primary);
+  border-radius: 8px;
+  color: var(--text-color);
+}
+
+.share-household-button {
+  padding: 12px 24px;
+  background-color: var(--highlight-tertiary);
+  border-radius: 8px;
+  color: var(--text-color);
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.share-household-button:hover {
+  background-color: var(--highlight-secondary);
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--highlight-primary);
+  border-radius: 8px;
+}
+
+.account-info p {
+  color: var(--text-color);
+}
+
+.logout-button {
+  padding: 12px 24px;
+  background-color: transparent;
+  border: 1px solid var(--highlight-secondary);
+  border-radius: 8px;
+  color: var(--text-color);
+  transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: var(--highlight-primary);
+}
+
+.migration-button {
+  padding: 12px 24px;
+  background-color: var(--highlight-tertiary);
+  border-radius: 8px;
+  color: var(--text-color);
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.migration-button:hover {
+  background-color: var(--highlight-secondary);
+}
+
+.migration-button:active {
+  opacity: 0.8;
+}
+

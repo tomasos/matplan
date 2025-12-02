@@ -1,0 +1,119 @@
+.add-meal {
+  min-height: 100vh;
+  padding: 24px 16px 100px;
+  background-color: var(--bg-primary);
+}
+
+.add-meal-title {
+  margin-bottom: 24px;
+}
+
+.add-meal-section {
+  margin-bottom: 24px;
+}
+
+.add-meal-label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.add-meal-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.add-meal-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--highlight-tertiary);
+}
+
+.category-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.category-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  border: 1px solid var(--text-color);
+  background-color: transparent;
+  color: var(--text-color);
+  transition: all 0.2s;
+}
+
+.category-button.active {
+  background-color: var(--highlight-tertiary);
+  border-color: var(--highlight-tertiary);
+}
+
+.category-button:hover {
+  opacity: 0.8;
+}
+
+.add-meal-input,
+.add-meal-textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.add-meal-textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.add-ingredient-button {
+  color: var(--text-color);
+  padding: 8px 0;
+  text-align: left;
+}
+
+.add-ingredient-button:hover {
+  opacity: 0.8;
+}
+
+.add-meal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.save-button {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--highlight-tertiary);
+  color: var(--text-color);
+  border-radius: 8px;
+  transition: opacity 0.2s;
+}
+
+.save-button:hover {
+  opacity: 0.9;
+}
+
+.delete-button {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--highlight-secondary);
+  color: var(--text-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.delete-button:hover {
+  opacity: 0.9;
+}
+

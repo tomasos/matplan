@@ -1,0 +1,96 @@
+.household-selector {
+  margin-bottom: 16px;
+}
+
+.household-selector-loading {
+  padding: 12px;
+  text-align: center;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.household-selector-create {
+  width: 100%;
+  padding: 12px 24px;
+  background: var(--highlight-primary);
+  color: var(--text-color);
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.household-selector-create:hover {
+  background: var(--highlight-secondary);
+}
+
+.household-selector-dropdown {
+  position: relative;
+}
+
+.household-selector-button {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--highlight-primary);
+  color: var(--text-color);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.household-selector-button:hover {
+  background: var(--highlight-secondary);
+}
+
+.household-selector-arrow {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.household-selector-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: var(--bg-primary);
+  border: 1px solid var(--highlight-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.household-selector-item {
+  width: 100%;
+  padding: 12px 16px;
+  text-align: left;
+  background: transparent;
+  color: var(--text-color);
+  border: none;
+  border-bottom: 1px solid var(--highlight-secondary);
+  transition: background 0.2s;
+}
+
+.household-selector-item:last-child {
+  border-bottom: none;
+}
+
+.household-selector-item:hover {
+  background: var(--highlight-primary);
+}
+
+.household-selector-item.active {
+  background: var(--highlight-secondary);
+  font-weight: 600;
+}
+
+.household-selector-item-create {
+  color: var(--highlight-tertiary);
+  font-weight: 600;
+}
+
+.household-selector-item-create:hover {
+  background: var(--highlight-primary);
+}
+

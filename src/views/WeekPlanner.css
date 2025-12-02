@@ -1,0 +1,39 @@
+.week-planner {
+  min-height: 100vh;
+  padding-bottom: 80px;
+  background-color: var(--bg-primary);
+}
+
+.week-planner-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 16px;
+}
+
+.week-planner-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.action-button {
+  width: 100%;
+  padding: 16px;
+  color: var(--text-color);
+  transition: opacity 0.2s;
+}
+
+.action-button:hover {
+  opacity: 0.9;
+}
+
+.generate-button {
+  background-color: var(--highlight-tertiary);
+}
+
+.clear-button {
+  background-color: var(--highlight-secondary);
+}
+

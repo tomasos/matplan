@@ -1,0 +1,29 @@
+.meal-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.meal-list-item:hover {
+  background-color: var(--highlight-primary);
+}
+
+.meal-list-item-name {
+  flex: 1;
+}
+
+.meal-list-item-favorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: var(--text-color);
+}
+
+.meal-list-item-favorite:hover {
+  opacity: 0.8;
+}
+

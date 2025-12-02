@@ -21,7 +21,7 @@ import './Desktop.css';
 
 export function Desktop() {
   const { year, week, weekInfo, goToPreviousWeek, goToNextWeek } = useWeekNavigation();
-  const { weekPlans, setMealForDay, clearWeek } = useWeekPlan();
+  const { weekPlans, setMealForDay, setWeekPlansBatch, clearWeek } = useWeekPlan();
   const { meals, toggleFavorite } = useMeals();
   const { categoryWeightings } = useSettings();
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
@@ -58,9 +58,7 @@ export function Desktop() {
 
   const handleGenerate = () => {
     const newPlan = generateSmartMealPlan(meals, year, week, weekPlans, categoryWeightings);
-    Object.entries(newPlan).forEach(([dayKey, mealId]) => {
-      setMealForDay(dayKey, mealId);
-    });
+    setWeekPlansBatch(newPlan);
   };
 
   const handleClearAll = () => {

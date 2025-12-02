@@ -15,6 +15,7 @@ interface WeekPlanContextType {
   weekPlans: WeekPlan;
   loading: boolean;
   setMealForDay: (dayKey: string, mealId: string | null) => Promise<void>;
+  setWeekPlansBatch: (updates: WeekPlan) => Promise<void>;
   clearWeek: (dayKeys: string[]) => Promise<void>;
 }
 
@@ -132,30 +133,54 @@ export function WeekPlanProvider({ children }: { children: ReactNode }) {
 
   const setMealForDay = useCallback(
     async (dayKey: string, mealId: string | null) => {
-      const updated = {
-        ...weekPlans,
-        [dayKey]: mealId,
-      };
-      setWeekPlans(updated);
-      await saveWeekPlans(updated);
+      setWeekPlans((prev) => {
+        const updated = {
+          ...prev,
+          [dayKey]: mealId,
+        };
+        saveWeekPlans(updated).catch((error) => {
+          console.error('Failed to save week plans:', error);
+        });
+        return updated;
+      });
     },
-    [weekPlans, saveWeekPlans]
+    [saveWeekPlans]
+  );
+
+  const setWeekPlansBatch = useCallback(
+    async (updates: WeekPlan) => {
+      setWeekPlans((prev) => {
+        const updated = {
+          ...prev,
+          ...updates,
+        };
+        saveWeekPlans(updated).catch((error) => {
+          console.error('Failed to save week plans:', error);
+        });
+        return updated;
+      });
+    },
+    [saveWeekPlans]
   );
 
   const clearWeek = useCallback(
     async (dayKeys: string[]) => {
-      const updated = { ...weekPlans };
-      dayKeys.forEach((dayKey) => {
-        updated[dayKey] = null;
+      setWeekPlans((prev) => {
+        const updated = { ...prev };
+        dayKeys.forEach((dayKey) => {
+          updated[dayKey] = null;
+        });
+        saveWeekPlans(updated).catch((error) => {
+          console.error('Failed to save week plans:', error);
+        });
+        return updated;
       });
-      setWeekPlans(updated);
-      await saveWeekPlans(updated);
     },
-    [weekPlans, saveWeekPlans]
+    [saveWeekPlans]
   );
 
   return (
-    <WeekPlanContext.Provider value={{ weekPlans, loading, setMealForDay, clearWeek }}>
+    <WeekPlanContext.Provider value={{ weekPlans, loading, setMealForDay, setWeekPlansBatch, clearWeek }}>
       {children}
     </WeekPlanContext.Provider>
   );

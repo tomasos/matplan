@@ -45,11 +45,11 @@ export function WeekPlanProvider({ children }: { children: ReactNode }) {
 
     try {
       setLoading(true);
-      const response = await databases!.listDocuments<WeekPlanDocument>(
+      const response = (await databases!.listDocuments(
         DATABASE_ID,
         COLLECTIONS.WEEK_PLANS,
         [Query.equal('householdId', currentHousehold.$id), Query.limit(1)]
-      );
+      )) as unknown as { documents: WeekPlanDocument[] };
 
       if (response.documents.length > 0) {
         const doc = response.documents[0];
@@ -57,7 +57,7 @@ export function WeekPlanProvider({ children }: { children: ReactNode }) {
         setWeekPlans(JSON.parse(doc.plans) || {});
       } else {
         // Create new document if it doesn't exist
-        const newDoc = await databases!.createDocument<WeekPlanDocument>(
+        const newDoc = (await databases!.createDocument(
           DATABASE_ID,
           COLLECTIONS.WEEK_PLANS,
           'unique()',
@@ -65,7 +65,7 @@ export function WeekPlanProvider({ children }: { children: ReactNode }) {
             householdId: currentHousehold.$id,
             plans: JSON.stringify({}),
           }
-        );
+        )) as unknown as WeekPlanDocument;
         documentIdRef.current = newDoc.$id;
         setWeekPlans({});
       }

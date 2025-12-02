@@ -5,7 +5,6 @@ import { MealCategory, Ingredient } from '../types';
 import { CategoryIcon } from '../components/CategoryIcon';
 import { IngredientInput } from '../components/IngredientInput';
 import { BottomNav } from '../components/BottomNav';
-import { Trash2 } from 'lucide-react';
 import './AddMeal.css';
 
 export function AddMeal() {

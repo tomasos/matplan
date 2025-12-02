@@ -12,7 +12,7 @@ interface ShareHouseholdModalProps {
 }
 
 export function ShareHouseholdModal({ onClose }: ShareHouseholdModalProps) {
-  const { currentHousehold, shareHousehold, loadInvitations, acceptInvitation } = useHousehold();
+  const { currentHousehold, shareHousehold } = useHousehold();
   const { user } = useAuth();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -25,18 +25,18 @@ export function ShareHouseholdModal({ onClose }: ShareHouseholdModalProps) {
   }, [currentHousehold]);
 
   const loadPendingInvitations = async () => {
-    if (!currentHousehold) return;
+    if (!currentHousehold || !databases) return;
 
     try {
       setLoadingInvitations(true);
-      const response = await databases.listDocuments<HouseholdInvitation>(
+      const response = (await databases.listDocuments(
         DATABASE_ID,
         COLLECTIONS.HOUSEHOLD_INVITATIONS,
         [
           Query.equal('householdId', currentHousehold.$id),
           Query.equal('status', 'pending'),
         ]
-      );
+      )) as unknown as { documents: HouseholdInvitation[] };
       setPendingInvitations(response.documents);
     } catch (error) {
       console.error('Failed to load invitations:', error);
@@ -69,17 +69,6 @@ export function ShareHouseholdModal({ onClose }: ShareHouseholdModalProps) {
       setError(error.message || 'Kunne ikke sende invitasjon. Prøv igjen.');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleAcceptInvitation = async (invitationId: string) => {
-    try {
-      await acceptInvitation(invitationId);
-      await loadPendingInvitations();
-      onClose();
-    } catch (error: any) {
-      console.error('Failed to accept invitation:', error);
-      setError(error.message || 'Kunne ikke akseptere invitasjon.');
     }
   };
 

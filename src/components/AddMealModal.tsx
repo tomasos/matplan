@@ -3,7 +3,7 @@ import { useMeals } from '../hooks/useMeals';
 import { MealCategory, Ingredient } from '../types';
 import { CategoryIcon } from './CategoryIcon';
 import { IngredientInput } from './IngredientInput';
-import { Trash2, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import './AddMealModal.css';
 
 interface AddMealModalProps {
@@ -200,7 +200,7 @@ export function AddMealModal({ mealId, onClose, onSave }: AddMealModalProps) {
                 <button onClick={onClose} className="cancel-button font-display-semibold-16">
                    Avbryt
                  </button>
-                 </>
+              </>
             )}
           </div>
         </div>

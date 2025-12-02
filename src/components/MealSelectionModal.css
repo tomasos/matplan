@@ -39,6 +39,36 @@
   opacity: 0.8;
 }
 
+.modal-filters {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--highlight-primary);
+}
+
+.modal-filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  color: var(--text-color);
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.modal-filter-button.active {
+  background-color: var(--highlight-primary);
+  border-color: var(--highlight-primary);
+}
+
+.modal-filter-button:hover {
+  opacity: 0.8;
+}
+
 .modal-search {
   padding: 16px;
   border-bottom: 1px solid var(--highlight-primary);

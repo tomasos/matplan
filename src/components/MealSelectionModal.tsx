@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react';
-import { Meal } from '../types';
+import { Meal, MealCategory } from '../types';
 import { MealListItem } from './MealListItem';
 import { fuzzySearch } from '../utils/searchUtils';
-import { X } from 'lucide-react';
+import { X, Carrot, Fish, Beef, Wine } from 'lucide-react';
 import './MealSelectionModal.css';
 
 interface MealSelectionModalProps {
@@ -13,13 +13,45 @@ interface MealSelectionModalProps {
 
 export function MealSelectionModal({ meals, onSelect, onClose }: MealSelectionModalProps) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState<Set<MealCategory>>(new Set());
+  const [showWeekend, setShowWeekend] = useState(false);
 
   const filteredMeals = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return meals;
-    }
-    return meals.filter((meal) => fuzzySearch(searchQuery, meal.name));
-  }, [meals, searchQuery]);
+    return meals.filter((meal) => {
+      // Category filter
+      if (selectedCategories.size > 0 && !selectedCategories.has(meal.category)) {
+        return false;
+      }
+
+      // Weekend filter
+      if (showWeekend && !meal.weekendMeal) {
+        return false;
+      }
+
+      // Search filter
+      if (searchQuery && !fuzzySearch(searchQuery, meal.name)) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [meals, selectedCategories, showWeekend, searchQuery]);
+
+  const toggleCategory = (category: MealCategory) => {
+    setSelectedCategories((prev) => {
+      const next = new Set(prev);
+      if (next.has(category)) {
+        next.delete(category);
+      } else {
+        next.add(category);
+      }
+      return next;
+    });
+  };
+
+  const toggleWeekend = () => {
+    setShowWeekend((prev) => !prev);
+  };
 
   const handleSelect = (mealId: string) => {
     onSelect(mealId);
@@ -33,6 +65,36 @@ export function MealSelectionModal({ meals, onSelect, onClose }: MealSelectionMo
           <h2 className="font-display-semibold-20">Velg rett</h2>
           <button className="modal-close" onClick={onClose} aria-label="Close">
             <X size={24} />
+          </button>
+        </div>
+        <div className="modal-filters">
+          <button
+            onClick={() => toggleCategory('vegetarian')}
+            className={`modal-filter-button ${selectedCategories.has('vegetarian') ? 'active' : ''}`}
+            aria-label="Vegetarian filter"
+          >
+            <Carrot size={24} />
+          </button>
+          <button
+            onClick={() => toggleCategory('fish')}
+            className={`modal-filter-button ${selectedCategories.has('fish') ? 'active' : ''}`}
+            aria-label="Fish filter"
+          >
+            <Fish size={24} />
+          </button>
+          <button
+            onClick={() => toggleCategory('meat')}
+            className={`modal-filter-button ${selectedCategories.has('meat') ? 'active' : ''}`}
+            aria-label="Meat filter"
+          >
+            <Beef size={24} />
+          </button>
+          <button
+            onClick={toggleWeekend}
+            className={`modal-filter-button ${showWeekend ? 'active' : ''}`}
+            aria-label="Weekend filter"
+          >
+            <Wine size={24} />
           </button>
         </div>
         <div className="modal-search">

@@ -5,7 +5,7 @@ import { MealCategory } from '../types';
 import { fuzzySearch } from '../utils/searchUtils';
 import { MealListItem } from '../components/MealListItem';
 import { BottomNav } from '../components/BottomNav';
-import { Carrot, Fish, Beef, Heart } from 'lucide-react';
+import { Carrot, Fish, Beef, Heart, Wine } from 'lucide-react';
 import './MealList.css';
 
 export function MealList() {
@@ -14,6 +14,7 @@ export function MealList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<Set<MealCategory>>(new Set());
   const [showFavorites, setShowFavorites] = useState(false);
+  const [showWeekend, setShowWeekend] = useState(false);
 
   const filteredMeals = useMemo(() => {
     return meals.filter((meal) => {
@@ -27,6 +28,11 @@ export function MealList() {
         return false;
       }
 
+      // Weekend filter
+      if (showWeekend && !meal.weekendMeal) {
+        return false;
+      }
+
       // Search filter
       if (searchQuery && !fuzzySearch(searchQuery, meal.name)) {
         return false;
@@ -34,7 +40,7 @@ export function MealList() {
 
       return true;
     });
-  }, [meals, selectedCategories, showFavorites, searchQuery]);
+  }, [meals, selectedCategories, showFavorites, showWeekend, searchQuery]);
 
   const toggleCategory = (category: MealCategory) => {
     setSelectedCategories((prev) => {
@@ -50,6 +56,10 @@ export function MealList() {
 
   const toggleFavorites = () => {
     setShowFavorites((prev) => !prev);
+  };
+
+  const toggleWeekend = () => {
+    setShowWeekend((prev) => !prev);
   };
 
   const handleMealClick = (mealId: string) => {
@@ -86,6 +96,13 @@ export function MealList() {
           aria-label="Favorites filter"
         >
           <Heart size={24} fill={showFavorites ? 'currentColor' : 'none'} />
+        </button>
+        <button
+          onClick={toggleWeekend}
+          className={`filter-button ${showWeekend ? 'active' : ''}`}
+          aria-label="Weekend filter"
+        >
+          <Wine size={24} />
         </button>
       </div>
 

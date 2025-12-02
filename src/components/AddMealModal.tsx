@@ -45,7 +45,7 @@ export function AddMealModal({ mealId, onClose, onSave }: AddMealModalProps) {
   }, [existingMeal, mealId]);
 
   const handleAddIngredient = () => {
-    setIngredients([...ingredients, { name: '', quantity: 0 }]);
+    setIngredients([...ingredients, { name: '', quantity: 1 }]);
   };
 
   const handleUpdateIngredient = (index: number, ingredient: Ingredient) => {
@@ -133,7 +133,6 @@ export function AddMealModal({ mealId, onClose, onSave }: AddMealModalProps) {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Fiskekake"
               className="add-meal-input font-regular-16"
               required
             />
@@ -145,7 +144,6 @@ export function AddMealModal({ mealId, onClose, onSave }: AddMealModalProps) {
               type="text"
               value={link}
               onChange={(e) => setLink(e.target.value)}
-              placeholder="https://vm.tiktok.com/ZNdx5eHgM/"
               className="add-meal-input font-regular-16"
             />
           </div>
@@ -155,7 +153,6 @@ export function AddMealModal({ mealId, onClose, onSave }: AddMealModalProps) {
             <textarea
               value={about}
               onChange={(e) => setAbout(e.target.value)}
-              placeholder="Fiskekakeoppskrifta til Maria i garden."
               className="add-meal-textarea font-regular-16"
               rows={4}
             />

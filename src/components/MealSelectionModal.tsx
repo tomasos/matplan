@@ -42,7 +42,6 @@ export function MealSelectionModal({ meals, onSelect, onClose }: MealSelectionMo
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="modal-search-input font-regular-16"
-            autoFocus
           />
         </div>
         <div className="modal-body">

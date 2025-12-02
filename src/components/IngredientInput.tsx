@@ -31,6 +31,7 @@ export function IngredientInput({ ingredient, onUpdate, onDelete }: IngredientIn
         onChange={handleNameChange}
         placeholder="Ingrediensnavn"
         className="ingredient-name font-regular-16"
+        autoFocus
       />
       <div className="ingredient-quantity">
         <button onClick={handleDecrement} className="quantity-button" aria-label="Decrease">

@@ -38,6 +38,7 @@
 .shopping-list-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
   gap: 12px;
 }
 
@@ -57,6 +58,7 @@
   transition: opacity 0.2s;
   text-align: left;
   width: 100%;
+  height: 100%;
 }
 
 .shopping-list-item:hover {

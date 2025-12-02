@@ -206,6 +206,7 @@ export function MealsProvider({ children }: { children: ReactNode }) {
         if (updates.weekendMeal !== undefined) updateData.weekendMeal = updates.weekendMeal;
 
         await databases!.updateDocument(DATABASE_ID, COLLECTIONS.MEALS, id, updateData);
+        loadMeals();
       } catch (error) {
         console.error('Failed to update meal:', error);
         throw error;

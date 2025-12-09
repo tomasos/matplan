@@ -24,7 +24,7 @@ const DAY_LETTERS: Record<DayOfWeek, string> = {
 const LONG_PRESS_DURATION = 500; // milliseconds
 
 export function MealCard({ day, mealName, category, onClick, onLongPress }: MealCardProps) {
-  const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const longPressTimerRef = useRef<number | null>(null);
   const [isLongPress, setIsLongPress] = useState(false);
   const [isPressing, setIsPressing] = useState(false);
 

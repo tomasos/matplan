@@ -92,6 +92,9 @@ export function Desktop() {
       return next;
     });
   };
+  const handleRemoveMeal = (dayKey: string) => {
+    setMealForDay(dayKey, null);
+  };
 
   return (
     <div className="desktop-layout">
@@ -109,6 +112,7 @@ export function Desktop() {
               mealName={meal?.name}
               category={meal?.category}
               onClick={() => handleCardClick(dayKey)}
+              onLongPress={() => handleRemoveMeal(dayKey)}
             />
           ))}
         </div>

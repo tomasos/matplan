@@ -52,6 +52,10 @@ export function WeekPlanner() {
     clearWeek(dayKeys);
   };
 
+  const handleRemoveMeal = (dayKey: string) => {
+    setMealForDay(dayKey, null);
+  };
+
   const availableMeals = meals;
 
   return (
@@ -66,6 +70,7 @@ export function WeekPlanner() {
             mealName={meal?.name}
             category={meal?.category}
             onClick={() => handleCardClick(dayKey)}
+            onLongPress={() => handleRemoveMeal(dayKey)}
           />
         ))}
       </div>

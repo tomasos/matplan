@@ -7,15 +7,29 @@
   justify-content: space-between;
   min-height: 120px;
   position: relative;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .meal-card:hover {
   opacity: 0.9;
 }
 
+.meal-card-pressing {
+  transform: scale(0.95);
+  opacity: 0.7;
+  box-shadow: 0 0 0 3px rgba(220, 220, 220, 0.5);
+}
+
 .meal-card-icon {
   margin-bottom: 8px;
+
+  @media (min-width: 768px) {
+    margin-top: 24px;
+    svg {
+    width: 48px;
+    height: 48px;
+    }
+  }
 }
 
 .meal-card-name {
@@ -24,6 +38,12 @@
   display: flex;
   align-items: center;
   margin: 8px 0;
+
+  @media (min-width: 768px) {
+    &.font-display-semibold-16 {
+      font-size: 24px;
+    }
+  }
 }
 
 .meal-card-day {
